@@ -1,0 +1,36 @@
+void main() {
+  print('hello');
+
+  myPrint('루피', 20);
+
+  myPrint2(age: 40 , name: '길동');
+  myPrint2(name: '철수');
+  myPrint3('민수', age: 30, isMarried: true);
+
+  Function myFun = () {
+    print("test");
+  };
+
+  // 화살표 함수
+  var myFun2  = () => print('test2..');
+  myFun2();
+}
+
+
+//네임드 + 포지셔닝
+void myPrint3(String name, {int age = 0, bool isMarried =false}){
+  print(name);
+  print(age);
+}
+
+// 네임드 파라미터
+void myPrint2({String name = '' , int? age}) {
+  print(name);
+  print(age);
+}
+
+//포지셔닝 파라미터(얼규먼트, 매개변수, 인자....
+void myPrint(String name , int age) {
+  print(name);
+  print(age);
+}
