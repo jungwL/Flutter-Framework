@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+
+// 플로터는 위젯이라는 클래스로 만들어진 소스
+void main() {
+  runApp(MaterialApp(
+    home: MainPage(),
+  ));
+}
+
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            Text('one'),
+            Text('two'),
+            Text('three'),
+          ],
+        ), //어러개 위젯
+      ),
+    );
+  }
+}
