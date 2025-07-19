@@ -1,0 +1,153 @@
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+void main() {
+  runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false, //디버그 띠 제거
+        title: 'Tom 프로필',
+        home: MainPage(),
+    )
+  );
+}
+
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.red,
+      body: Padding(
+        padding: EdgeInsetsGeometry.all(30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: CircleAvatar(
+                backgroundImage: AssetImage('images/loopy.gif'),
+                radius: 100,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Divider(
+              color: Colors.green[900],
+            ),
+            Text(
+              'Name',
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 3, //자간
+              ),
+            ),
+            Text(
+              'Monkey D. Luffy',
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 3, //자간
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              'WANTED',
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 3, //자간
+              ),
+            ),
+            Text(
+              '3,000,000,000',
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 3, //자간
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(Icons.check_circle_outline),
+                SizedBox(
+                  width: 10,
+                ),
+                Text('Gum Gum Jet Pistol'),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.check_circle_outline),
+                SizedBox(
+                  width: 10,
+                ),
+                Text('Gum Gum Jet Pistol'),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(Icons.check_circle_outline),
+                SizedBox(
+                  width: 10,
+                ),
+                Text('Gum Gum Jet Pistol'),
+              ],
+            )
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Color(0xFFDEB887),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: (){
+                Fluttertoast.showToast(
+                    msg: 'hoome icon click!',
+                    gravity: ToastGravity.CENTER,
+                  backgroundColor: Colors.black,
+                  textColor: Colors.white,
+                  fontSize: 15,
+                  toastLength: Toast.LENGTH_LONG,
+                );
+              },
+              icon: Icon(Icons.home),
+            ),
+            IconButton(
+              onPressed: (){
+
+              },
+              icon: Icon(Icons.mail),
+            ),
+            IconButton(
+              onPressed: (){
+
+              },
+              icon: Icon(Icons.people),
+            ),
+
+          ],
+        ),
+      ), //하단바
+      appBar: AppBar( //상단 바
+        backgroundColor: Color(0xFFDEB887),
+        title: Text(
+          '루피 프로필',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+      ),
+    );
+  }
+}
+
