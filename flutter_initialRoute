@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'a.dart';
+import 'b.dart';
+import 'home.dart';
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    //라우팅(페이징 전환 - Scoffold위젯 전환)
+    initialRoute: '/',
+    
+    //home: 속성값을 채울 Scaffold위젯 전환
+    //routes 속성값은 Map타입이다
+    routes: {
+      '/' : (context){
+        return Home();
+      },
+      '/a' : (context) {
+        return A();
+      },
+      '/b' : (context) {
+        return B();
+      },
+    },
+    )
+  );
+}
+
+import 'package:flutter/material.dart';
+
+class A extends StatelessWidget {
+  const A({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+            'A',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+      ),
+    );
+  }
+}
