@@ -1,0 +1,20 @@
+void main() {
+  //복합데이터 타입 -컬렉션
+  var x =10;
+
+  var arr = [3,5,10]; //복합 데이터 타입 - List
+  print(arr[0]); //3
+  print(arr[1]); //5
+  print(arr[2]); //10
+  print(arr[0].runtimeType);
+  print(arr.runtimeType);
+
+  // Set : 인덱스가 없고, 중복데이터를 받지 않는다.
+  var mySet = {'루피','나미','쵸파','루피'};
+  print(mySet.first);
+
+  // Map
+  var myMap = {'ID':'Test','PW':'1234'}; // 키 값 조합
+  print(myMap['ID']);
+  print(myMap['PW']);
+}
