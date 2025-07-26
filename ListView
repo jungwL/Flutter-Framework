@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+
+//ListVeiw , Listtile  : Modle data
+void main() {
+runApp(MaterialApp(
+  debugShowCheckedModeBanner: false,
+  home: Main(),
+));
+}
+
+class Main extends StatefulWidget {
+  const Main({super.key});
+
+  @override
+  State<Main> createState() => _MainState();
+}
+
+class _MainState extends State<Main> {
+  //model data
+  List<String> list = ['루피','조로','나미'];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            'ListView 연습',
+          style: TextStyle(
+            color: Colors.yellow,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
+      //모델의  길이에 따라서 동적으로 생성
+      body: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) { //list.length 만큼 리스트타일 개수
+          return Dismissible(
+            background: Container(
+              color: Colors.red,
+            ),
+            key: Key(list[index] =index.toString()), //유닉한 문자열
+            child: ListTile(
+              title: Text(list[index]),
+              trailing: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      print(index);
+                      list.removeAt(index);
+                    });
+                  },
+                  icon: Icon(Icons.remove)
+              ),
+            ),
+          );
+        }
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            setState(() {
+              list.add('이름 ');
+            });
+            print('FloatingActionButton 클릭');
+            print(list);
+          },
+          child: Icon(Icons.add),
+          backgroundColor: Colors.red,
+          tooltip: '리스트 추가',
+      ),
+    );
+  }
+}
+
