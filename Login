@@ -1,0 +1,97 @@
+import 'package:flutter/material.dart';
+
+//ListVeiw , Listtile  : Modle data
+void main() {
+runApp(MaterialApp(
+  debugShowCheckedModeBanner: false,
+  home: Main(),
+));
+}
+
+class Main extends StatefulWidget {
+  const Main({super.key});
+
+  @override
+  State<Main> createState() => _MainState();
+}
+
+class _MainState extends State<Main> {
+
+  //하나의 텍스트필드를 제어 가능한 타입
+  TextEditingController idController = TextEditingController();
+  var pwController = TextEditingController();
+
+  String resultMsg = '';
+
+  void login() {
+    String adminId = 'admin';
+    String adminPw = '1234';
+
+    String inputId = idController.text;
+    String inputPw = pwController.text;
+
+    if(adminId == inputId && adminPw == inputPw) {
+      resultMsg = '$inputId 로그인 성공입니다';
+    }else {
+      resultMsg = '아이디 비밀번호를 확인하세요';
+    }
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('로그인'),
+            content: Text(resultMsg),
+            actions: [
+              TextButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  child: Text('확인')
+              )
+            ],
+          );
+        }
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('로그인 예제')),
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: '아이디',
+              ),
+              controller: idController, // 아이디 제어할 수 있는 변수
+            ),
+            SizedBox(
+              height: 60,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: '패스워드',
+              ),
+              obscureText: true,
+              controller: pwController,
+            ),
+            SizedBox(
+              height: 60,
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  login();
+                },
+                child: Text('로그인'),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+}
