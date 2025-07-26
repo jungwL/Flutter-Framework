@@ -1,0 +1,21 @@
+void main()  {
+  //reduce
+  var studentScore = [50,90,76 ,88, 100];
+  // 누적 구하는 방법
+  // 첫번째 50 , 90
+  // 두번째 140 , 76
+
+
+  var names = ['가나','다라','마사'];
+  String sumName = names.reduce((x , y) {
+    return x + '/' + y;
+  });
+  print(sumName);
+
+  //fold
+  // 첫번째 y가 50부터시작 x 는 초기값(첫번째 매개변수를 지정해야됨
+  int sum2=studentScore.fold(100,(x , y) { //x = 이전까지 결과 y = 새로들어온값
+    return x + y;
+  });
+  print(sum2);
+}
