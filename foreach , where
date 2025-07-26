@@ -1,0 +1,25 @@
+void main(){
+  //ListView
+  //dart  리스트와 관련된 유틸함수들
+  //foreach , where , reduce, fold, map
+
+  List<String> names = ["루피", "조로" ,"상디"];
+  //구조적
+  for(int i = 0 ; i<names.length ; i ++){
+    print(names[i]);
+  }
+  //함수지향적 방식 
+  //foreach 의 매개값함수는 names.length 만큼 실행됨
+  //매개함수의 매개값으로 요소값을 전달해준다.
+  names.forEach((element) {
+    print(element);
+  });
+  //where
+  var nums = [1,2,3,4,5,6,7,8,9];
+
+  var nums2 = nums.where((element){ //element 1 ~9까지
+    return element % 2 == 0;
+  });
+  var nums3 = nums2.toList();
+  print(nums3);
+}
