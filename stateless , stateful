@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MainPage(),
+  ));
+}
+// Scaffold 세팅 후 새로운
+/*class MainPage extends StatelessWidget {
+   MainPage({super.key});
+
+   int cnt = 0;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            Text('cnt : ${cnt}'),
+            ElevatedButton(
+                onPressed: () {
+                  cnt = cnt + 1;
+                  print(cnt);
+                },
+                child: Text('버튼 ')
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}*/
+class MainPage extends StatefulWidget {//값이 변경되거나 위젯모양이 바뀌는 경우 stateful
+  const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> { 
+  int cnt = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            Text('cnt : $cnt'),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() { //콜백 함수
+                    cnt = cnt + 1;
+                  });
+                  print(cnt);
+            },
+                child: Text("버튼")
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
