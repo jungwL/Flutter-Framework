@@ -1,0 +1,19 @@
+void main() {
+  print('start');
+  delay();
+  print('end'); //end 출력이 delay() 와 같이 출력되었으면 좋겠음
+}
+
+Future<void> delay() async{
+  print('dalay start');
+  await Future.delayed(Duration(seconds: 4));
+  print('dalay end');
+}
+
+void delay2() {
+  print('dalay start');
+  for(int i =0 ; i< 1000000000; i++){
+
+  }
+  print('dalay end');
+}
