@@ -1,0 +1,47 @@
+import 'dart:math';
+
+void main() {
+  callBack(evenNum);
+  // ?. , ?? , ??= : 널 인지 연산자
+
+  // ?, ! : 널 관련 키워드
+  String? myName = getName();
+  print('---------------------------------');
+  print(myName?.length); // 자동으로 컴파일러에서 취소됨  myName? 이 null이면 . 뒤에 연산은 취소된다
+
+  String myName2 = myName ?? '조로';
+  print(myName2);
+// 위 연산자를 풀어서 쓴것
+  if (myName != null) {
+    myName2 = myName;
+  } else {
+    myName2 = '조로';
+  }
+
+  String? name = null;
+  name ??= '성호';
+  print("----------------------------------");
+  print(name);
+
+  /*if(name == null) {
+
+  }
+
+}*/
+}
+void callBack(Function f) {
+  f();
+}
+
+//분리된 익명함수
+void evenNum() {
+  for(int i=1; i<10 ; i++) {
+    if(i%2 ==0) {
+      print(i);
+    }
+  }
+}
+
+String? getName() { // null값이 반환될 확률이 50%
+  return Random().nextDouble() > 0.5 ? '루피' : null;
+}
