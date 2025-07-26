@@ -1,0 +1,161 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Main(),
+    )
+  );
+}
+
+class Main extends StatefulWidget {
+
+  const Main({super.key});
+
+  @override
+  State<Main> createState() => _MainState();
+}
+
+class _MainState extends State<Main> {
+ @override
+  void initState() { //위젯이 만들어질때 처음 실행된다.
+   super.initState();
+   print(initState);
+   loadPref(); //위젯이 생성될때 파일 읽어온다.
+  }
+  //파일을 읽어오는 함수
+  void loadPref() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      todoList = prefs.getStringList('todoList') ?? [];
+    });
+
+  }
+  //파일을 덮어쓰기 함수
+  void writePref() async{
+    //데이터 저장할 파일
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //todoList가 추가 삭제 수정 ==> 수정된 todist에 덮어쓰기
+    await prefs.setStringList('todoList', todoList);
+    print('writePref');
+  }
+  var todoController = TextEditingController();
+  List<String> todoList = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Todo List',style: TextStyle(color: Colors.white),),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+        actions: [
+          IconButton(
+            onPressed: (){
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return  Container(
+                    height: 280,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Text('add tobo'),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: TextField(
+                            autofocus: true,
+                            controller: todoController,
+                            decoration: InputDecoration(
+                              labelText: '가나다라마바사',
+                              hintText: '아자차카' //placeholder
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            if(todoController.text.isNotEmpty) {
+                              setState(() {
+                                todoList.insert(0, todoController.text); //첫번째 데이터가 젤 마지막 입력
+                                print(todoList);
+                              });
+                              return;
+                            }
+                            if(todoList.contains(todoController.text)) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text('중복'),
+                                  content: Text('이미존재합니다'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.of(context).pop(),
+                                      child: Text('확인'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            writePref();
+                            Navigator.pop(context);
+                          },
+                          child: Text('입력')
+                        )
+                      ],
+                    ),
+                  );
+                }
+              );
+            },
+            icon: Icon(Icons.add,color: Colors.white,)
+          )
+        ],
+      ),
+      body: ListView.builder(
+        itemCount: todoList.length,
+        itemBuilder: (context , index) { //ListTile 의 빌드
+          return ListTile(
+            title: Text(todoList[index]),
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    height: 50,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          todoList.removeAt(index);
+                        });
+                        //삭제 후 pop
+                        Navigator.pop(context);
+                        writePref();
+                      },
+                      child: Text('${todoList[index]}  삭제')
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        }
+      ),
+      drawer: Drawer(
+
+      ),
+      
+    );
+  }
+}
+
