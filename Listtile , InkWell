@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+          body: ListView(
+            children: [
+              ListTile(
+                leading: Icon(Icons.favorite),
+                title: Text('ListTile 아이템'),
+                subtitle: Text('제목, 부제목, 아이콘, 트레일링 등 구성요소를 손쉽게 배치'),
+                trailing: Icon(Icons.chevron_right),
+                onTap: () {
+                  print('ListTile 아이템 탭됨');
+                },
+              ),
+
+              InkWell(
+                onTap: () {
+                  print('InkWell 아이템 탭됨');
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  // 내부에 어떤 위젯이든 래핑 가능
+                  child: Row(
+                    children: [
+                      Icon(Icons.star),
+                      SizedBox(width: 8),
+                      Text("InkWell 아이템"),
+                    ],
+                  ),
+                ),
+              ),
+
+              GestureDetector(
+                onTap: () {
+                  print('GestureDetector 아이템 탭됨');
+                },
+                onDoubleTap: () {
+                  print('GestureDetector 아이템 더블 탭됨');
+                },
+                onPanEnd: (e) { // 드래그가 끝나면
+                  print('GestureDetector 아이템 드래그 됨');
+                },
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  color: Colors.grey[200],
+                  child: Text('GestureDetector 아이템'),
+                ),
+              ),
+              Container(
+                child: Text("Container 아이템 - 단독 사용 시 터치 불가"),
+              ),
+              Text("oter widget....아이템 - 단독 사용 시 터치 불가"),
+            ],
+          ),
+        )
+    );
+  }
+}
