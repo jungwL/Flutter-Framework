@@ -1,0 +1,82 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:async/async.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: Homepage(),
+  ));
+}
+
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+
+  var pageController = PageController();
+  
+  @override
+  //제일 먼저 자동으로 호출되는 함수
+  void initState() {
+    super.initState();
+
+// 생성과 동시에 타이머 스케줄러 생성
+    Timer.periodic(
+      Duration(seconds: 3),
+          (timer) {
+        print('timer 실행');
+        int? nextPage = pageController.page?.toInt();
+
+        if (nextPage == 4) {
+          pageController.jumpToPage(0);
+        } else {
+          nextPage = nextPage! + 1;
+          pageController.animateToPage(
+            //이동할 페이지
+            nextPage,
+            //다음으로 슬라이드 이동 시간
+            duration: Duration(milliseconds: 500), // microseconds → milliseconds 수정
+            //슬라이드 모양
+            curve: Curves.ease,
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageView(
+        controller: pageController,
+        children: [
+          Image.asset(
+            'img/pic1.jpg',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'img/pic2.jpg',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'img/pic3.jpg',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'img/pic4.jpg',
+            fit: BoxFit.cover,
+          ),
+          Image.asset(
+            'img/pic5.jpg',
+            fit: BoxFit.cover,
+          ),
+        ],
+      ),
+    );
+  }
+}
