@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+      home: Root(),
+    )
+  );
+}
+
+class Root extends StatelessWidget {
+  Root({super.key});
+
+  int rootCnt = 0;
+
+  void setRootCnt(int rootCnt) {
+    this.rootCnt = rootCnt;
+  }
+
+  int getRootCnt(){
+    return rootCnt;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String rootName = 'root';
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('title : $rootName + rootCnt : ${rootCnt}' ),
+      ),
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              print('root.rootCnt : ${rootCnt}');
+            },
+            child: Text('root.rootCnt 출력')
+          ),
+          Sub(setRootCnt: setRootCnt, getRootCnt: getRootCnt)
+        ],
+      ) // root가 가진 rootName값을 rootName2에 넣어주겠다.
+    );
+  }
+}
+
+class Sub extends StatelessWidget {
+   Sub({super.key , required this.setRootCnt , required this.getRootCnt});
+
+   Function setRootCnt; // 부모위젯의 값을 변경
+   Function getRootCnt; // 부모위젯의 값을 읽기
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        onPressed: (){
+            setRootCnt(getRootCnt() + 1);
+          }, 
+        child: Text('+') 
+      ),
+    );
+  }
+}
